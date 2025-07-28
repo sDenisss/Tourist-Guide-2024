@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Туристический гид</title>
+    <link rel="stylesheet" href="/Frontend/css/styleHome.css"> <!-- Подключаем файл стилей -->
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header>
+        <div class="header-container">
+            <h1>Туристический гид</h1>
+            <p>Ваш лучший путеводитель по достопримечательностям мира</p>
+            <div class="circleProfile" onclick="location.href='/profile';"></div>
+        </div>
+    </header>
+
+    <!-- Основное меню -->
+    <main class="Main">
+        <div class="menu">
+            <!-- <h2>Меню</h2> -->
+            <ul>
+                <li><a href="search">Поиск достопримечательностей по региону</a></li>
+                <li><a href="route-planner">Планирование маршрута</a></li>
+                <li><a href="history">Просмотр истории рекомендованных путей</a></li>
+                <!-- <li><a href="add-in-db">Добавить в базу данных</a></li> -->
+                <li><a href="exit">Выйти из программы</a></li>
+            </ul>
+        </div>
+    </main>
+
+    <script src="/Frontend/js/script.js"></script>
+</body>
+</html>

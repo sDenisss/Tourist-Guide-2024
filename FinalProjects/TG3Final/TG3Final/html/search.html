@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поисковик</title>
+    <link rel="stylesheet" href="/Frontend/css/styleSearch.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <a class="back" href="/"><</a>
+        <h1 style="color: white">Туристический гид</h1>
+        <p>Ваш лучший путеводитель по достопримечательностям мира</p>
+        <div class="circleProfile"></div>
+    </header>
+    
+    <h1>Поиск достопримечательностей по региону</h1>
+    <form id="search-form">
+        <label for="region">Введите регион или город</label>
+        <br>
+        <input type="text" id="region" placeholder="Регион или город">
+        <p>
+            <button type="submit">Поиск</button> 
+            <button type="reset" onclick="clearTable()">Очистить</button>
+        </p>
+    </form>
+
+    <!-- Таблица для отображения достопримечательностей -->
+    <table id="attractions-table">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Регион</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Список достопримечательностей будет добавлен сюда -->
+        </tbody>
+    </table>
+
+    <script>
+        const form = document.getElementById('search-form');
+        const tableBody = document.getElementById('attractions-table').querySelector('tbody');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Отключаем стандартное поведение формы
+            const region = document.getElementById('region').value;
+
+            // Загружаем данные с сервера
+            const response = await fetch(`/attractions?region=${encodeURIComponent(region)}`);
+            if (!response.ok) {
+                if (region.length < 3 || region > 20)
+                    alert("Регион должен быть длиной от 3 до 20 символов");
+                console.error('Error fetching attractions:', response.statusText);
+                return;
+            }
+
+            const data = await response.json();
+            clearTable(); // Очистить таблицу перед добавлением новых данных
+
+            // Добавляем данные в таблицу
+            data.forEach(attraction => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${attraction.name}</td>
+                    <td>${attraction.region}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        });
+
+        function clearTable() {
+            tableBody.innerHTML = '';
+        }
+    </script>
+</body>
+</html>

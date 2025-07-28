@@ -1,0 +1,86 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #2d2d44;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header .circle-profile {
+    width: 50px;
+    height: 50px;
+    background-color: #d9dbd9;
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+header .circle-profile:hover {
+    background-color: #2c82d7;
+}
+
+main {
+    padding: 20px;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #2d2d44;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f9f9f9;
+}
+
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #2d2d44;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #37324e;
+}
+
+h1 {
+    text-align: center;
+}
+
+.back{
+    text-decoration: none;
+    color: white;
+    background: #42425e;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease; /* Плавный переход */
+    position: fixed;
+    left: 10px;
+}

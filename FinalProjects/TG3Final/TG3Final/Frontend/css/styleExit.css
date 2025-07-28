@@ -1,0 +1,83 @@
+/* Основные стили */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Фон */
+.background-image {
+    background: url('/Assets/Images/ese.jpg') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+}
+
+/* Шапка */
+.header {
+    text-align: center;
+    color: #2d2d44;
+    padding: 20px;
+}
+
+.header h1 {
+    font-size: 2em;
+}
+
+/* Кнопка */
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #2d2d44;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #37324e;
+}
+
+.Main {
+    display: flex;
+}
+.menu {
+    max-width: fit-content;
+    margin-top: 150px;
+    margin-left: 700px;
+    margin-right: auto;
+}
+
+/* Меню */
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+.menu li {
+    margin: 10px 0;
+    
+}
+
+.menu a {
+    text-decoration: none;
+    color: #2d2d44;
+    font-size: 18px;
+    display: inline-block;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    background-color: #2d2d44;
+    color: white;
+    border: none;
+    cursor: pointer;
+    
+}
+
+.menu a:hover {
+    background-color: #37324e;
+    color: white;
+}

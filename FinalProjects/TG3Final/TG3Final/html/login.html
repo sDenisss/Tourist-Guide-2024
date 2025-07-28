@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход</title>
+    <link rel="stylesheet" href="/Frontend/css/styleLogin.css">
+</head>
+<body>
+    <main class="mainpr">
+        <div class="profile">
+            <a class="back" href="/">←</a>
+            <h2 style="text-align: center">Вход</h2>
+            <div class="profile-row-name">
+                <span class="label1">Имя:</span>
+                <input type="text" id="name">
+            </div>
+            <div class="profile-row-password">
+                <span class="label2">Пароль:</span>
+                <input type="password" id="password">
+            </div>
+            <div class="reg">
+                <a href="registry">Зарегистрироваться</a>
+            </div>
+            <div class="confirm">
+                <a id="loginBtn" href="#" onclick="logIn();">Подтвердить</a>
+            </div>
+            <!-- Кнопка для отмены запроса -->
+            <div class="cancel">
+                <a id="cancelBtn" href="#" onclick="cancelRequest();">Отменить</a>
+            </div>
+        </div>
+    </main>
+    <script>
+        // AbortController для отмены запросов
+        const controller = new AbortController();
+        const signal = controller.signal;
+
+        async function logIn() {
+            const username = document.getElementById("name").value;
+            const password = document.getElementById("password").value;
+
+            try {
+                // Получаем email пользователя
+                const emailResponse = await fetch("/getEmail", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ Username: username, Password: password }),
+                    signal: signal // передаем сигнал отмены
+                });
+
+                const emailResult = await emailResponse.json();
+
+                if (!emailResponse.ok) {
+                    alert(emailResult.message || "Ошибка получения данных. Проверьте логин и пароль.");
+                    return;
+                }
+
+                const email = emailResult.email;
+
+                // Получаем id пользователя
+                const idResponse = await fetch("/getId", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ Username: username, Password: password }),
+                    signal: signal // передаем сигнал отмены
+                });
+
+                const idResult = await idResponse.json();
+
+                if (!idResponse.ok) {
+                    alert(idResult.message || "Ошибка получения id. Проверьте логин и пароль.");
+                    return;
+                }
+
+                const id = idResult.id;
+
+                // Выполняем вход
+                const response = await fetch("/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ Username: username, Email: email, Password: password, Id: id }),
+                    signal: signal // передаем сигнал отмены
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    const currentUser = { username, email, password, id };
+                    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+                    window.location.href = "/profile";  // Перенаправление на страницу профиля
+                } else {
+                    alert(result.message);
+                }
+            } catch (error) {
+                if (error.name === 'AbortError') {
+                    alert('Отмена');
+                } else {
+                    console.error(error);
+                    alert('Произошла ошибка при выполнении запроса.');
+                }
+            }
+        }
+
+        // Функция для отмены запроса
+        function cancelRequest() {
+            controller.abort(); // Осуществляем отмену запроса
+        }
+    </script>
+</body>
+</html>

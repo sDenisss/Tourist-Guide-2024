@@ -1,0 +1,168 @@
+/* Основные стили для страницы */
+body {
+    font-family: Arial, sans-serif;
+    background: url('/Assets/Images/bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+/* Основной контейнер профиля */
+.profile {
+    margin: auto;
+    background: rgba(236, 231, 231, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    justify-content: center;
+}
+
+.mainpr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Высота на весь экран */
+    text-align: left;
+}
+
+/* Строка профиля */
+.profile-row-name {
+    display: flex;
+    justify-content: space-between; /* Элементы растягиваются по краям */
+    padding: 10px 0;
+    font-size: 18px;
+    color: #180a0a;
+    border-bottom: 1px solid #ccc; /* Разделительная линия */
+}
+
+.profile-row-name:last-child {
+    border-bottom: none; /* Убираем линию для последней строки */
+}
+
+/* Строка профиля */
+.profile-row-password {
+    display: flex;
+    justify-content: space-between; /* Элементы растягиваются по краям */
+    padding: 10px 0;
+    font-size: 18px;
+    color: #180a0a;
+    border-bottom: 1px solid #ccc; /* Разделительная линия */
+}
+
+.profile-row-password:last-child {
+    border-bottom: none; /* Убираем линию для последней строки */
+}
+
+/* Для заголовков и значений */
+.label1 {
+    font-weight: bold;
+}
+
+/* Для заголовков и значений */
+.label2 {
+    font-weight: bold;
+}
+
+#name {
+    font-style: italic;
+    color: #333;
+}
+
+#password {
+    font-style: italic;
+    color: #333;
+
+}
+
+input {
+    height: 1.4em;
+    border-radius: 5%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+/* Кнопка выхода */
+.reg {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.reg a {
+    text-decoration: none;
+    color: white;
+    background: #6b6b9a;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease; /* Плавный переход */
+}
+
+.reg a:hover {
+    background: #505080;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05); /* Лёгкое увеличение */
+}
+
+.confirm {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.confirm a {
+    text-decoration: none;
+    color: white;
+    background: #6b6b9a;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease; /* Плавный переход */
+}
+
+.confirm a:hover {
+    background: #505080;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05); /* Лёгкое увеличение */
+}
+
+.back{
+    text-decoration: none;
+    color: white;
+    background: #42425e;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease; /* Плавный переход */
+}
+
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .profile {
+        padding: 20px;
+    }
+
+    .profile-row-name {
+        font-size: 16px;
+    }
+
+    .profile-row-mail {
+        font-size: 16px;
+    }
+
+    .reg a {
+        font-size: 16px;
+        padding: 10px 15px;
+    }
+}

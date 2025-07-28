@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История маршрутов</title>
+    <link rel="stylesheet" href="/Frontend/css/styleHistory.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="header-container">
+            <a class="back" href="/"><</a>
+            <h1>Туристический гид</h1>
+            <p>Ваш лучший путеводитель по достопримечательностям мира</p>
+            <div class="circle-profile"></div>
+        </div>
+    </header>
+
+    <main>
+        <h1 class="page-title">История маршрутов</h1>
+        <table id="history-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Достопримечательности</th>
+                    <th>Дата</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Маршруты будут добавлены сюда -->
+            </tbody>
+        </table>
+        <button class="clear-history-btn" onclick="clearHistory()">Очистить Историю</button>
+    </main>
+
+    <script>
+        const historyTableBody = document.getElementById('history-table').querySelector('tbody');
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+        // Загрузка истории маршрутов
+        async function loadHistory() {
+            const response = await fetch(`/getHistory?userId=${encodeURIComponent(currentUser.id)}`);
+            if (!response.ok) {
+                console.error('Ошибка загрузки истории:', response.statusText);
+                return;
+            }
+        
+            const history = await response.json();
+            console.log('История из ответа:', history);  // Логируем историю
+        
+            historyTableBody.innerHTML = '';  // Очищаем таблицу перед добавлением новых строк
+        
+            history.forEach((item, index) => {
+                const action = item.action || 'Нет данных';
+                const date = item.date ? new Date(item.date).toLocaleDateString() : 'Неизвестная дата';
+            
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${action}</td>
+                    <td>${date}</td>
+                `;
+                historyTableBody.appendChild(row);
+            });
+            
+
+        }
+        
+        
+        
+        // Очистка истории
+        async function clearHistory() {
+            const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+            const userId = currentUser.id; // Получаем userId из локального хранилища
+        
+            const response = await fetch('/clearHistory', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ userId }) // Отправляем userId в запросе
+            });
+        
+            if (response.ok) {
+                historyTableBody.innerHTML = ''; // Очищаем таблицу на клиенте
+                console.log("История успешно очищена.");
+            } else {
+                const error = await response.json();
+                console.error('Ошибка при очистке истории:', error.message);
+            }
+        }
+        
+        
+        
+        // Запускаем функцию загрузки истории при загрузке страницы
+        document.addEventListener('DOMContentLoaded', loadHistory);
+    </script>
+</body>
+</html>

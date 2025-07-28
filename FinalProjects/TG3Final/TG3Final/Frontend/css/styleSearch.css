@@ -1,0 +1,80 @@
+/* Основные стили для страницы */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Шапка */
+header {
+    background-color: #2d2d44;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Заголовок */
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* Форма поиска */
+form {
+    text-align: center;
+    margin: 10px auto;
+}
+
+form input[type="text"] {
+    width: 200px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+form button {
+    padding: 5px 10px;
+    margin: 3px;
+    background-color: #2d2d44;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+form button:hover {
+    background-color: #37324e;
+}
+
+/* Таблица достопримечательностей */
+table {
+    width: 90%;
+    margin: 15px auto;
+    border-collapse: collapse;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: #2d2d44;
+    color: white;
+}
+
+.back{
+    text-decoration: none;
+    color: white;
+    background: #42425e;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease; /* Плавный переход */
+    position: fixed;
+    left: 10px;
+}

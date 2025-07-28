@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="/Frontend/css/styleRegistry.css">
+</head>
+<body>
+    <main class="mainpr">
+        <div class="profile">
+            <a class="back" href="/">←</a>
+            <h2 style="text-align: center">Регистрация</h2>
+            <div class="profile-row-name">
+                <span class="label1">Имя:</span>
+                <input type="text" id="name">
+            </div>
+            <div class="profile-row-mail">
+                <span class="label2">Почта:</span>
+                <input type="text" id="mail">
+            </div>
+            <div class="profile-row-password">
+                <span class="label3">Пароль:</span>
+                <input type="password" id="password">
+            </div>
+            <div class="log">
+                <a href="login">Войти</a>
+            </div>
+            <div class="add">
+                <a id="adduser" href="#" onclick="saveData();">Сохранить</a>
+            </div>
+        </div>
+    </main>
+    <script>
+        async function saveData() {
+            const username = document.getElementById("name").value;
+            const email = document.getElementById("mail").value;
+            const password = document.getElementById("password").value;
+
+            if (!username || !email || !password) {
+                alert("Пожалуйста, заполните все поля!");
+                return;
+            }
+
+            // Регистрируем нового пользователя
+            const response = await fetch("/registry", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ Username: username, Email: email, Password: password })
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                // После регистрации, авторизуем пользователя
+                const loginResponse = await fetch("/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ Username: username, Email: email, Password: password })
+                });
+
+                const loginResult = await loginResponse.json();
+
+                if (loginResponse.ok) {
+                    const currentUser = { username, email, password, id: loginResult.userId };
+                    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+                    window.location.href = "/profile";  // Перенаправление на страницу профиля
+                } else {
+                    alert(loginResult.message);
+                }
+            } else {
+                alert(result.message);
+            }
+        }
+    </script>
+</body>
+</html>

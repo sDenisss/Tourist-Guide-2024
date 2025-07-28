@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль</title>
+    <link rel="stylesheet" href="/Frontend/css/styleProfile.css"> <!-- Подключаем файл стилей -->
+</head>
+<body>
+    <main class="mainpr">
+        <div class="profile">
+            <a class="back" href="/"><</a>
+            <h2 style="text-align: center">Профиль</h2>
+            <div class="profile-row-name">
+                <span class="label1">Имя:</span>
+                <span id="value1"></span>
+            </div>
+            <div class="profile-row-mail">
+                <span class="label2">Почта:</span>
+                <span id="value2"></span>
+            </div>
+            <div class="log">
+                <a href="/login">Войти</a>
+            </div>
+            <div class="reg">
+                <a href="/registry">Зарегистрироваться</a> 
+            </div>
+            <div class="logout">
+                <a href="#">Выйти из аккаунта</a>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        function loadUserProfile() {
+            // Получаем данные текущего пользователя
+            const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        
+            if (currentUser) {
+                // Выводим имя пользователя
+                document.getElementById("value1").textContent = currentUser.username || "Не указано";
+                document.getElementById("value2").textContent = currentUser.email || "Не указано";
+            } else {
+                // Если данных нет, перенаправляем на страницу входа
+                //alert("Вы не авторизованы. Пожалуйста, войдите в систему.");
+                window.location.href = "/login";
+            }
+        }
+        
+        function logout() {
+            // Удаляем данные текущего пользователя
+            localStorage.removeItem("currentUser");
+            //alert("Вы вышли из аккаунта.");
+            window.location.href = "/login";
+        }
+        
+        // Загружаем данные профиля при загрузке страницы
+        loadUserProfile();
+        
+        // Добавляем обработчик события выхода
+        document.querySelector(".logout a").addEventListener("click", logout);
+        
+    </script>
+</body>
+</html>

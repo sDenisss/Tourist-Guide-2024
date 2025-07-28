@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выход</title>
+    <link rel="stylesheet" href="/Frontend/css/styleExit.css"> <!-- Один CSS-файл -->
+</head>
+<body class="background-image">
+    <div class="header">
+        <main class="Main">
+            <div class="menu">
+                <h1>Вы точно хотите выйти?</h1>
+                <button><a href="/exit2" style="width: 1.5em" onclick=cleaner()>Да</a></button>
+                <button><a href="/">Нет</a></button>
+            </div>
+        </main>
+    </div>
+    <script>
+        function cleaner()
+        {
+            localStorage.clear();
+        }
+    </script>
+</body>
+</html>

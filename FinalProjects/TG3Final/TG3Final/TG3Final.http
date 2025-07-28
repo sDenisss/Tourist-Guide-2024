@@ -1,0 +1,6 @@
+@TG3Final_HostAddress = http://localhost:5070
+
+GET {{TG3Final_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
